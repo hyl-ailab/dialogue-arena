@@ -198,7 +198,7 @@ pytest tests/ -v
   title  = {Dialogue Arena: Self-Evolving Multi-Model Dialogue Corpus Generation},
   author = {Dialogue Arena Contributors},
   year   = {2026},
-  url    = {https://github.com/YOUR_USERNAME/dialogue-arena}
+  url    = {https://github.com/hyl-ailab/dialogue-arena}
 }
 ```
 
