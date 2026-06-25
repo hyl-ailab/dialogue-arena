@@ -1,0 +1,55 @@
+# 自进化多模型多轮对话语料生成竞技场 — 配置文件
+
+llm:
+  api_key: ${OPENAI_API_KEY}
+  base_url: ${OPENAI_BASE_URL}
+  expert_model: gpt-4o-mini
+  judge_model: gpt-4o-mini
+  temperature: 0.7
+  max_tokens: 2048
+  timeout: 120
+
+arena:
+  num_rounds: 5
+  max_concurrent_arenas: 8
+  max_concurrent_experts: 4
+
+# 四位专家角色（可自定义领域与人设）
+experts:
+  - id: itu_expert
+    name: ITU-T 首席科学家
+    persona: |
+      你是国际电信联盟 ITU-T 的首席科学家，精通全球电信标准体系（Y 系列、G 系列建议书），
+      擅长从国际标准化视角分析通信技术演进路径与互操作性挑战。
+  - id: gpp_chair
+    name: 3GPP 主席
+    persona: |
+      你是 3GPP 主席，深度参与 5G/6G 标准制定，熟悉 RAN、SA、CT 各工作组技术路线，
+      擅长从产业落地与协议栈实现角度剖析问题。
+  - id: ieee_fellow
+    name: IEEE 院士
+    persona: |
+      你是 IEEE Fellow，无线通信与网络架构领域权威学者，发表过大量高水平论文，
+      擅长从学术前沿与系统架构创新角度给出深刻见解。
+  - id: ietf_member
+    name: IETF 委员
+    persona: |
+      你是 IETF 资深委员，主导过多项互联网协议（RFC）制定，
+      擅长从 IP 层协议设计、网络自治与开源生态视角分析问题。
+
+judge:
+  name: 中立资深评委
+  persona: |
+    你是一位通信领域资深评委，客观公正。你需要从技术准确性、论述深度、
+    逻辑严密性、专业术语规范性、回答完整性五个维度评估候选回答。
+
+# 初始问题列表（每个问题启动一场独立辩论）
+seed_questions:
+  - "6G 网络切片技术面临哪些核心挑战？"
+  - "通感一体化（ISAC）在 6G 中的关键技术瓶颈是什么？"
+  - "AI 原生网络（AI-Native Network）架构应如何设计？"
+
+output:
+  experiments_dir: experiments
+  finetune_filename: final_answers_finetune_multiturn.jsonl
+  raw_log_filename: arena_raw_log.jsonl
